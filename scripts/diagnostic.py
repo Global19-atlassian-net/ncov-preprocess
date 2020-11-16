@@ -8,11 +8,20 @@ import numpy as np
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from Bio.Seq import Seq
 from Bio import AlignIO, SeqIO
-from priorities import sequence_to_int_array
 from augur.utils import read_metadata
 from datetime import datetime
 
 tmrca = datetime(2019, 12, 1).toordinal()
+
+
+def sequence_to_int_array(s, fill_value=110, fill_gaps=True):
+    seq = np.frombuffer(str(s).lower().encode('utf-8'), dtype=np.int8).copy()
+    if fill_gaps:
+        seq[(seq!=97) & (seq!=99) & (seq!=103) & (seq!=116)] = fill_value
+    else:
+        seq[(seq!=97) & (seq!=99) & (seq!=103) & (seq!=116) & (seq!=45)] = fill_value
+    return seq
+
 
 def expected_divergence(date, rate_per_day = 25/365):
     try:
