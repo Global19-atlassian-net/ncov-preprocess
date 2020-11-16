@@ -1,0 +1,37 @@
+# This file contains defaults for the "config" object used in the Snakefile.
+# To temporarily override or provide a value, you can use snakemake's --config
+# or --configfile options.
+---
+# conda environment file to use by default
+conda_environment: "../nextstrain.yaml"
+
+# These are the two main starting files for the run
+sequences: "data/sequences.fasta"
+metadata: "data/metadata.tsv"
+
+# Define files used for external configuration. Common examples consist of a
+# list of strains to include and exclude from analyses, a reference sequence to
+# align sequences to, colors for strain attributes in auspice, and auspice
+# configuration files.
+files:
+  exclude: "defaults/exclude.txt"
+  alignment_reference: "defaults/reference_seq.fasta"
+
+# Filter settings
+filter:
+  # Require nearly full-length genomes.
+  min_length: 27000
+
+# Mask settings determine how the multiple sequence alignment is masked prior to phylogenetic inference.
+mask:
+  # Number of bases to mask from the beginning and end of the alignment. These regions of the genome
+  # are difficult to sequence accurately.
+  mask_from_beginning: 100
+  mask_from_end: 50
+
+  # Specific sites to mask in the reference genome's coordinates.
+  # These are 1-indexed coordinates of sites that have been identified as prone to sequencing errors.
+  # 13402, 24389 and 24390 are restricted to Belgian samples
+  mask_sites: "13402 24389 24390"
+
+S3_BUCKET: "s3://nextstrain-ncov-private"
