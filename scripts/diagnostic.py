@@ -99,7 +99,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # load entire alignment and the alignment of focal sequences (upper case -- probably not necessary)
-    ref  = SeqIO.read(args.reference, 'genbank').seq
+    ref  = SeqIO.read(args.reference, 'fasta' if args.reference.endswith('fasta') else 'genbank').seq
     metadata, _ = read_metadata(args.metadata)
 
     diagnostics = analyze_divergence(args.alignment, metadata, ref,
