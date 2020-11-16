@@ -3,7 +3,7 @@
 # or --configfile options.
 ---
 # conda environment file to use by default
-conda_environment: "../nextstrain.yaml"
+conda_environment: "../env/nextstrain.yaml"
 
 # These are the two main starting files for the run
 sequences: "data/sequences.fasta"
