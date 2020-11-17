@@ -35,14 +35,3 @@ mask:
   mask_sites: "13402 24389 24390"
 
 S3_BUCKET: "s3://nextstrain-ncov-private"
-
-cluster-config: cluster/cluster.json
-
-cluster: "sbatch --time={cluster.time} --mem={cluster.mem} --cpus-per-task={cluster.n} --qos={cluster.qos}"
-
-jobs: 128
-
-jobscript: cluster/submit.sh
-
-# Set the name for the job as display in the cluster queue.
-jobname: "{rulename}.{jobid}.sh"
