@@ -1,11 +1,11 @@
 import os
-
+localrules: download, upload
 
 rule upload:
     input:
-        "results/masked.fasta.gz",
-        "results/aligned.fasta.gz",
-        "results/filtered.fasta.gz",
+        "results/masked.fasta",
+        "results/aligned.fasta",
+        "results/filtered.fasta",
         "results/sequence-diagnostics.tsv",
         "results/flagged-sequences.tsv",
         "results/to-exclude.txt"
@@ -169,18 +169,3 @@ rule mask:
             --mask-terminal-gaps \
             --output {output.alignment} 2>&1 | tee {log}
         """
-
-rule all:
-    input:
-        "results/masked.fasta",
-        "results/aligned.fasta",
-        "results/filtered.fasta"
-    output:
-        "results/masked.fasta.gz",
-        "results/aligned.fasta.gz",
-        "results/filtered.fasta.gz"
-    shell:
-        '''
-        gzip {input}
-        '''
-
