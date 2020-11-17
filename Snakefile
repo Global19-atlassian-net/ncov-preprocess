@@ -1,5 +1,5 @@
 import os
-localrules: download, upload
+localrules: download, upload, clean
 
 rule upload:
     input:
@@ -167,3 +167,7 @@ rule mask:
             --mask-terminal-gaps \
             --output {output.alignment} 2>&1 | tee {log}
         """
+
+rule clean:
+     message: "clean"
+     shell: "rm -rf results data"
