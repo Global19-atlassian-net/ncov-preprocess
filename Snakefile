@@ -13,9 +13,7 @@ rule upload:
         s3_bucket = config["S3_BUCKET"]
     run:
         for fname in input:
-            shell(f"./scripts/upload-to-s3 {fname} {params.s3_bucket}/{os.path.basename(fname)}")
-
-
+            shell(f"./scripts/upload-to-s3 {fname} {params.s3_bucket}/{os.path.basename(fname)}.gz")
 
 
 rule download:
@@ -72,7 +70,7 @@ rule align:
         "logs/align.txt"
     benchmark:
         "benchmarks/align.txt"
-    threads: 16
+    threads: 8
     conda: config["conda_environment"]
     shell:
         """
