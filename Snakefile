@@ -36,7 +36,7 @@ rule filter:
         """
     input:
         sequences = rules.download.output.sequences,
-        metadata = rules.download.output.metadata,
+        metadata = rules.download.output.metadata
     output:
         sequences = "results/filtered.fasta"
     log:
