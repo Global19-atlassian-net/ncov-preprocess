@@ -37,7 +37,6 @@ rule filter:
     input:
         sequences = rules.download.output.sequences,
         metadata = rules.download.output.metadata,
-        exclude = config["files"]["exclude"]
     output:
         sequences = "results/filtered.fasta"
     log:
@@ -50,7 +49,6 @@ rule filter:
         augur filter \
             --sequences {input.sequences} \
             --metadata {input.metadata} \
-            --exclude {input.exclude} \
             --min-length {params.min_length} \
             --output {output.sequences} 2>&1 | tee {log}
         """
